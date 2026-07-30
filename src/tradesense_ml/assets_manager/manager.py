@@ -3,6 +3,7 @@
 import json
 from pathlib import Path
 from typing import Any, cast
+
 from tradesense_ml.domain.schemas.rubrics import Rubric
 
 

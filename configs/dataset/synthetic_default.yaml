@@ -1,0 +1,37 @@
+# Hydra synthetic dataset configuration
+name: "tradesense_synthetic_coaching"
+version: "0.1.0"
+num_samples: 100
+seed: 42
+output_format: "jsonl"
+output_dir: "datasets"
+
+market_regime_distribution:
+  BULLISH_TREND: 0.20
+  BEARISH_TREND: 0.15
+  RANGE_BOUND: 0.15
+  HIGH_VOLATILITY_BREAKOUT: 0.10
+  BEARISH_BREAKDOWN: 0.10
+  HIGH_VOLATILITY: 0.05
+  LOW_VOLATILITY_CONSOLIDATION: 0.05
+  NEWS_DRIVEN_SPIKE: 0.05
+  FLASH_CRASH: 0.05
+  RECOVERY: 0.10
+
+behaviour_probabilities:
+  DISCIPLINE: 0.25
+  FOMO: 0.15
+  REVENGE_TRADING: 0.10
+  OVERCONFIDENCE: 0.10
+  FEAR: 0.08
+  HESITATION: 0.07
+  IMPULSIVENESS: 0.07
+  POSITION_SIZING_ERRORS: 0.05
+  MOVING_STOP_LOSS: 0.05
+  IGNORING_PLAN: 0.05
+  CHASING_PRICE: 0.03
+
+risk_profiles:
+  - "conservative"
+  - "moderate"
+  - "aggressive"

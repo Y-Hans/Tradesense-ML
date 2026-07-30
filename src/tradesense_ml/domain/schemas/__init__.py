@@ -38,6 +38,7 @@ from tradesense_ml.domain.schemas.synthetic import (
     BiasType,
     MarketScenarioConfig,
     SyntheticGenerationBatch,
+    SyntheticGeneratorConfig,
 )
 from tradesense_ml.domain.schemas.teacher import (
     ProviderMetadata,
@@ -79,6 +80,7 @@ __all__ = [
     "MarketScenarioConfig",
     "BiasInjectionConfig",
     "SyntheticGenerationBatch",
+    "SyntheticGeneratorConfig",
     "DatasetSplit",
     "DatasetVersionMetadata",
     "ReviewedExample",

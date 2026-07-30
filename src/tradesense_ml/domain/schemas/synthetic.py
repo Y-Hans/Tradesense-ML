@@ -14,6 +14,14 @@ class BiasType(str, Enum):
     FOMO = "FOMO"
     REVENGE_TRADING = "REVENGE_TRADING"
     OVERCONFIDENCE = "OVERCONFIDENCE"
+    FEAR = "FEAR"
+    HESITATION = "HESITATION"
+    DISCIPLINE = "DISCIPLINE"
+    IMPULSIVENESS = "IMPULSIVENESS"
+    POSITION_SIZING_ERRORS = "POSITION_SIZING_ERRORS"
+    MOVING_STOP_LOSS = "MOVING_STOP_LOSS"
+    IGNORING_PLAN = "IGNORING_PLAN"
+    CHASING_PRICE = "CHASING_PRICE"
     LOSS_AVERSION = "LOSS_AVERSION"
     DISPOSITION_EFFECT = "DISPOSITION_EFFECT"
     NO_BIAS_CLEAN = "NO_BIAS_CLEAN"
@@ -27,7 +35,9 @@ class MarketScenarioConfig(BaseModel):
     scenario_id: str = Field(..., description="Unique scenario ID")
     symbol: str = Field(..., description="Target symbol")
     regime: MarketRegime = Field(..., description="Target regime")
-    volatility: VolatilityLevel = Field(..., description="Target volatility level")
+    volatility: VolatilityLevel = Field(
+        default=VolatilityLevel.MEDIUM, description="Target volatility level"
+    )
     num_candles: int = Field(default=100, gt=0, description="Length of price series")
     seed: int | None = Field(default=42, description="Random seed for reproducibility")
 
@@ -57,3 +67,24 @@ class SyntheticGenerationBatch(BaseModel):
     generation_metadata: dict[str, Any] = Field(
         default_factory=dict, description="Job configuration parameters"
     )
+
+
+class SyntheticGeneratorConfig(BaseModel):
+    """Configuration for synthetic data generation engine."""
+
+    model_config = ConfigDict(frozen=True)
+
+    num_samples: int = Field(default=100, gt=0, description="Total synthetic samples to generate")
+    seed: int = Field(default=42, description="Random seed for reproducibility")
+    market_regime_distribution: dict[MarketRegime, float] = Field(
+        default_factory=dict, description="Relative weights for market regimes"
+    )
+    behaviour_probabilities: dict[BiasType, float] = Field(
+        default_factory=dict, description="Probabilities for behavioral biases"
+    )
+    risk_profiles: list[str] = Field(
+        default_factory=lambda: ["conservative", "moderate", "aggressive"],
+        description="Supported risk profiles",
+    )
+    output_format: str = Field(default="jsonl", description="Export format: jsonl, json, parquet")
+    output_dir: str = Field(default="datasets", description="Destination output directory")
