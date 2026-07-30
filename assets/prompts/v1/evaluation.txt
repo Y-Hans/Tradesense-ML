@@ -1,0 +1,15 @@
+Evaluate the following trading coach response based on:
+1. Risk Assessment Accuracy (0-10)
+2. Discipline Evaluation Accuracy (0-10)
+3. Reason Code Alignment (0-10)
+4. Hallucination / Factuality (0-10)
+5. Educational Value (0-10)
+
+Target Coach Response:
+{coach_response}
+
+Actual Trade Record:
+{trade_record}
+
+Market Context:
+{market_context}

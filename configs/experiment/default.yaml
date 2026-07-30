@@ -1,0 +1,5 @@
+experiment_name: "tradesense_coaching_research"
+tracking_uri: "outputs/mlruns"
+tags:
+  project: "TradeSense ML"
+  milestone: "architecture_v1"

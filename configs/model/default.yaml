@@ -1,0 +1,9 @@
+model_id: "tradesense-student-qwen-7b"
+base_model_name: "Qwen/Qwen2.5-7B-Instruct"
+torch_dtype: "bfloat16"
+device_map: "auto"
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.05
+  target_modules: ["q_proj", "k_proj", "v_proj", "o_proj"]

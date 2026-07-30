@@ -1,0 +1,14 @@
+[
+  {
+    "example_id": "seed_001",
+    "description": "FOMO trade entry into overextended rally without stop loss",
+    "tags": ["fomo", "no_stop_loss", "equity"],
+    "difficulty": "medium"
+  },
+  {
+    "example_id": "seed_002",
+    "description": "Revenge trading after losing trade, doubling position size",
+    "tags": ["revenge_trading", "overleveraged", "options"],
+    "difficulty": "hard"
+  }
+]

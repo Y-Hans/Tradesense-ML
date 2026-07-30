@@ -1,0 +1,11 @@
+run_name: "qwen2.5-7b-coaching-qlora"
+strategy: "qlora"
+learning_rate: 0.0002
+batch_size: 4
+gradient_accumulation_steps: 4
+num_epochs: 3
+warmup_ratio: 0.03
+optimizer: "adamw_torch"
+lr_scheduler: "cosine"
+save_steps: 100
+eval_steps: 100

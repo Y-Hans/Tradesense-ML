@@ -1,0 +1,16 @@
+{
+  "template_id": "market_context_v1",
+  "symbol": "{symbol}",
+  "timeframe": "{timeframe}",
+  "trend": "{trend}",
+  "volatility": "{volatility}",
+  "key_levels": {
+    "support": ["{support_1}", "{support_2}"],
+    "resistance": ["{resistance_1}", "{resistance_2}"]
+  },
+  "indicators": {
+    "rsi": "{rsi}",
+    "macd": "{macd_signal}",
+    "vwap": "{vwap}"
+  }
+}

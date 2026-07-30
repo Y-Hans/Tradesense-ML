@@ -1,0 +1,14 @@
+{
+  "benchmark_id": "coaching_benchmark_v1",
+  "version": "1.0.0",
+  "name": "TradeSense Coaching Quality Benchmark v1",
+  "description": "Standard benchmark evaluating risk explanation, discipline scoring, reason code accuracy, and JSON adherence.",
+  "target_metrics": [
+    "json_validity_rate",
+    "reason_code_precision",
+    "risk_explanation_score",
+    "discipline_explanation_score",
+    "hallucination_rate"
+  ],
+  "sample_ids": ["seed_001", "seed_002"]
+}

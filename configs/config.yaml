@@ -1,0 +1,14 @@
+# Hydra Root Configuration for TradeSense ML
+defaults:
+  - dataset: default
+  - teacher: default
+  - training: default
+  - evaluation: default
+  - model: default
+  - logging: default
+  - storage: default
+  - experiment: default
+  - _self_
+
+app_name: "TradeSense ML"
+environment: "development"

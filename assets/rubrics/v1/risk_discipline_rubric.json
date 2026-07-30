@@ -1,0 +1,27 @@
+{
+  "rubric_id": "risk_discipline_v1",
+  "version": "1.0.0",
+  "title": "Risk and Discipline Evaluation Rubric",
+  "criteria": [
+    {
+      "name": "risk_score_accuracy",
+      "description": "Accurate calculation and explanation of trade risk parameters.",
+      "weight": 0.3
+    },
+    {
+      "name": "discipline_score_accuracy",
+      "description": "Identification of behavioral biases (FOMO, revenge trading, overleveraging).",
+      "weight": 0.3
+    },
+    {
+      "name": "reason_code_precision",
+      "description": "Exact match and application of standardized reason codes.",
+      "weight": 0.2
+    },
+    {
+      "name": "educational_clarity",
+      "description": "Actionable, non-judgmental, clear guidance for future trades.",
+      "weight": 0.2
+    }
+  ]
+}

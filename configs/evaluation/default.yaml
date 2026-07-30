@@ -1,0 +1,9 @@
+benchmark_id: "coaching_benchmark_v1"
+rubric_id: "risk_discipline_v1"
+eval_batch_size: 16
+metrics:
+  - "json_validity_rate"
+  - "reason_code_precision"
+  - "risk_explanation_score"
+  - "discipline_explanation_score"
+  - "hallucination_rate"

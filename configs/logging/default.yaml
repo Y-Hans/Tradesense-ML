@@ -1,0 +1,3 @@
+level: "INFO"
+file_path: "outputs/logs/tradesense.log"
+serialize: false

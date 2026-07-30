@@ -1,0 +1,6 @@
+provider: "openrouter"
+model_name: "anthropic/claude-3.5-sonnet"
+temperature: 0.2
+max_tokens: 2048
+consensus_threshold: 0.8
+cost_limit_usd: 50.0

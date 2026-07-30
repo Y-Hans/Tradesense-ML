@@ -1,0 +1,7 @@
+name: "tradesense_coaching_v1"
+version: "1.0.0"
+split: "train"
+synthetic_batch_size: 100
+review_status: "AUTOMATED_VALIDATION"
+prompt_version: "v1"
+rubric_version: "v1"
