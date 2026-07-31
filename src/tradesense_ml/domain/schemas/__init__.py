@@ -1,6 +1,30 @@
 """TradeSense ML schema package exports."""
 
+from tradesense_ml.domain.schemas.benchmark import (
+    BenchmarkArtifact,
+    BenchmarkCase,
+    BenchmarkExecutionResult,
+    BenchmarkLineage,
+    BenchmarkMetadata,
+    BenchmarkMetric,
+    BenchmarkProfile,
+    BenchmarkReport,
+    BenchmarkResult,
+    BenchmarkRun,
+    BenchmarkScore,
+    BenchmarkSuite,
+    BenchmarkSummary,
+)
 from tradesense_ml.domain.schemas.coaching import CoachRequest, CoachResponse
+from tradesense_ml.domain.schemas.dataset import (
+    DatasetArtifact,
+    DatasetExample,
+    DatasetLineage,
+    DatasetManifest,
+    DatasetMetadata,
+    DatasetStatistics,
+    DatasetVersion,
+)
 from tradesense_ml.domain.schemas.evaluations import (
     DisciplineEvaluation,
     ReasonCodeCategory,
@@ -23,9 +47,12 @@ from tradesense_ml.domain.schemas.market_context import (
     VolatilityLevel,
 )
 from tradesense_ml.domain.schemas.review import (
+    ReasonCode,
     ReviewAuditRecord,
     ReviewDecision,
+    ReviewResult,
     ReviewStage,
+    ReviewVerdict,
 )
 from tradesense_ml.domain.schemas.rubrics import (
     EvaluationResult,
@@ -76,7 +103,10 @@ __all__ = [
     "RubricScore",
     "EvaluationResult",
     "ReviewStage",
+    "ReviewVerdict",
+    "ReviewResult",
     "ReviewDecision",
+    "ReasonCode",
     "ReviewAuditRecord",
     "BiasType",
     "MarketScenarioConfig",
@@ -91,5 +121,24 @@ __all__ = [
     "EvaluationExample",
     "InferenceRequest",
     "InferenceResponse",
+    "DatasetExample",
+    "DatasetStatistics",
+    "DatasetLineage",
+    "DatasetManifest",
+    "DatasetMetadata",
+    "DatasetVersion",
+    "DatasetArtifact",
+    "BenchmarkProfile",
+    "BenchmarkMetadata",
+    "BenchmarkMetric",
+    "BenchmarkCase",
+    "BenchmarkExecutionResult",
+    "BenchmarkResult",
+    "BenchmarkScore",
+    "BenchmarkSummary",
+    "BenchmarkRun",
+    "BenchmarkSuite",
+    "BenchmarkLineage",
+    "BenchmarkReport",
+    "BenchmarkArtifact",
 ]
-

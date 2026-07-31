@@ -1,6 +1,7 @@
 """Configuration models and Hydra initialization helpers."""
 
 from pathlib import Path
+from typing import Any
 
 from omegaconf import DictConfig, OmegaConf
 from pydantic import BaseModel, Field
@@ -28,6 +29,50 @@ class ExperimentSettings(BaseModel):
     tracking_uri: str = "outputs/mlruns"
 
 
+class ReviewSettings(BaseModel):
+    """Review pipeline configuration settings."""
+
+    strategy: str = "single"
+    reviewer: str = "rule_based"
+    approval_threshold: float = 7.0
+    revision_threshold: float = 4.0
+    criteria_version: str = "v1.0.0"
+    review_version: str = "v1.0.0"
+    review_timeout: float = 30.0
+    quality_weights: dict[str, float] = Field(
+        default_factory=lambda: {
+            "reasoning_quality": 0.25,
+            "coaching_usefulness": 0.25,
+            "educational_value": 0.20,
+            "consistency": 0.15,
+            "completeness": 0.15,
+        }
+    )
+
+
+class DatasetSettings(BaseModel):
+    """Dataset builder configuration settings."""
+
+    dataset_id: str = "tradesense_sft_v1"
+    dataset_version: str = "v1.0.0"
+    dataset_format: str = "sft_instruction"
+    export_formats: list[str] = Field(default_factory=lambda: ["jsonl", "json", "parquet"])
+    split_ratios: dict[str, float] = Field(
+        default_factory=lambda: {"train": 0.8, "validation": 0.1, "test": 0.1}
+    )
+    filtering: dict[str, Any] = Field(
+        default_factory=lambda: {
+            "only_approved": True,
+            "min_quality_score": 7.0,
+            "min_confidence": 0.0,
+            "remove_duplicates": True,
+            "remove_incomplete": True,
+        }
+    )
+    seed: int = 42
+    output_dir: str = "datasets"
+
+
 class AppSettings(BaseModel):
     """Global application settings."""
 
@@ -36,6 +81,8 @@ class AppSettings(BaseModel):
     logging: LoggingSettings = Field(default_factory=LoggingSettings)
     storage: StorageSettings = Field(default_factory=StorageSettings)
     experiment: ExperimentSettings = Field(default_factory=ExperimentSettings)
+    review: ReviewSettings = Field(default_factory=ReviewSettings)
+    dataset: DatasetSettings = Field(default_factory=DatasetSettings)
 
 
 def load_hydra_config(

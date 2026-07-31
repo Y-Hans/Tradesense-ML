@@ -77,7 +77,6 @@ class RenderedPrompt(BaseModel):
         )
 
 
-
 class TeacherResponse(BaseModel):
     """Standardized response received from a Teacher model."""
 

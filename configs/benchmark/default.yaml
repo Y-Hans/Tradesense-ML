@@ -1,0 +1,63 @@
+# Hydra Benchmark Suite Configuration
+
+benchmark_id: "coaching_benchmark_v1"
+version: "v1.0.0"
+profile: "teacher_evaluation"
+
+target_model: "teacher_llm_v1"
+student_model: null
+prompt_version: "v1"
+
+enabled_suites:
+  - "teacher_benchmark_suite"
+
+enabled_cases:
+  - "coaching_quality"
+  - "risk_analysis"
+  - "discipline_analysis"
+  - "educational_quality"
+  - "actionability"
+  - "reasoning_quality"
+  - "safety"
+
+enabled_metrics:
+  - "quality_score"
+  - "pass_rate"
+  - "consistency_score"
+  - "confidence"
+  - "latency"
+  - "token_usage"
+
+metric_weights:
+  quality_score: 1.0
+  pass_rate: 1.0
+  consistency_score: 1.0
+
+scoring_weights:
+  category_weights:
+    coaching: 0.30
+    risk_discipline: 0.30
+    reasoning_actionability: 0.25
+    safety_compliance: 0.15
+  case_weights:
+    coaching_quality: 1.5
+    risk_analysis: 1.5
+    discipline_analysis: 1.5
+    safety: 2.0
+
+pass_threshold: 6.0
+output_dir: "outputs/benchmarks"
+random_seed: 42
+
+validation_options:
+  strict_schema: true
+  reject_on_failure: true
+
+report_options:
+  generate_markdown: true
+  include_lineage: true
+  export_formats:
+    - "json"
+    - "jsonl"
+    - "parquet"
+    - "md"

@@ -7,9 +7,9 @@ from tradesense_ml.domain.schemas import (
     CoachResponse,
     DisciplineEvaluation,
     ReviewAuditRecord,
-    ReviewDecision,
     ReviewedExample,
     ReviewStage,
+    ReviewVerdict,
     RiskEvaluation,
     Side,
     Trade,
@@ -28,7 +28,7 @@ class MockValidationStage(BaseReviewStage):
             record_id="rec_val_1",
             stage=self.stage_enum,
             reviewer_id="automated_validator",
-            decision=ReviewDecision.APPROVE,
+            decision=ReviewVerdict.APPROVE,
             score=10.0,
             comments="Schema and rules validated.",
         )
@@ -46,7 +46,7 @@ class MockAITeacherReviewStage(BaseReviewStage):
             record_id="rec_ai_1",
             stage=self.stage_enum,
             reviewer_id="teacher_claude35",
-            decision=ReviewDecision.APPROVE,
+            decision=ReviewVerdict.APPROVE,
             score=9.5,
             comments="Consensus review approved.",
         )

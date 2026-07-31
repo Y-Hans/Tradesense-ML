@@ -45,7 +45,8 @@ class ResponseParser:
                 ) from exc
         else:
             raise ResponseParsingError(
-                f"Unsupported output type '{type(raw_output).__name__}'", raw_content=str(raw_output)
+                f"Unsupported output type '{type(raw_output).__name__}'",
+                raw_content=str(raw_output),
             )
 
         # Unwrap if nested under outer container keys
@@ -61,18 +62,24 @@ class ResponseParser:
             payload_dict["response_id"] = f"resp_{request_id}"
 
         # Standardize actionable_advice if passed as a single string
-        if "actionable_advice" in payload_dict and isinstance(payload_dict["actionable_advice"], str):
+        if "actionable_advice" in payload_dict and isinstance(
+            payload_dict["actionable_advice"], str
+        ):
             lines = [
                 line.lstrip("-*• ").strip()
                 for line in payload_dict["actionable_advice"].splitlines()
                 if line.strip()
             ]
-            payload_dict["actionable_advice"] = lines if lines else [payload_dict["actionable_advice"]]
+            payload_dict["actionable_advice"] = (
+                lines if lines else [payload_dict["actionable_advice"]]
+            )
 
         try:
             return CoachResponse.model_validate(payload_dict)
         except ValidationError as exc:
-            logger.error(f"Validation error during response parsing for request {request_id}: {exc}")
+            logger.error(
+                f"Validation error during response parsing for request {request_id}: {exc}"
+            )
             raise ResponseParsingError(
                 f"Schema validation failure during parsing: {exc}",
                 raw_content=str(raw_output),
@@ -89,7 +96,6 @@ class ResponseParser:
         matches = re.findall(pattern, stripped, re.IGNORECASE)
         if matches:
             return str(matches[0]).strip()
-
 
         # If no codeblock, locate first '{' and last '}'
         start_idx = stripped.find("{")

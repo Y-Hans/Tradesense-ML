@@ -52,9 +52,13 @@ class ResponseValidator:
 
         disc_eval = response.discipline_evaluation
         if not (0.0 <= disc_eval.discipline_score <= 10.0):
-            errors.append(f"discipline_score {disc_eval.discipline_score} out of bounds [0.0, 10.0].")
+            errors.append(
+                f"discipline_score {disc_eval.discipline_score} out of bounds [0.0, 10.0]."
+            )
         if not (0.0 <= disc_eval.plan_adherence_score <= 10.0):
-            errors.append(f"plan_adherence_score {disc_eval.plan_adherence_score} out of bounds [0.0, 10.0].")
+            errors.append(
+                f"plan_adherence_score {disc_eval.plan_adherence_score} out of bounds [0.0, 10.0]."
+            )
         if not disc_eval.discipline_summary or not disc_eval.discipline_summary.strip():
             errors.append("discipline_summary is missing or empty.")
 
@@ -72,7 +76,9 @@ class ResponseValidator:
 
         is_valid = len(errors) == 0
         if not is_valid:
-            logger.warning(f"Response {response.response_id} failed validation with {len(errors)} error(s): {errors}")
+            logger.warning(
+                f"Response {response.response_id} failed validation with {len(errors)} error(s): {errors}"
+            )
 
         return ValidationResult(
             is_valid=is_valid,

@@ -1,7 +1,27 @@
-name: "tradesense_coaching_v1"
-version: "1.0.0"
-split: "train"
-synthetic_batch_size: 100
-review_status: "AUTOMATED_VALIDATION"
-prompt_version: "v1"
-rubric_version: "v1"
+# Dataset Builder Hydra Root Configuration
+dataset_id: "tradesense_sft_v1"
+dataset_version: "v1.0.0"
+dataset_format: "sft_instruction"
+export_formats:
+  - "jsonl"
+  - "json"
+  - "parquet"
+
+split_ratios:
+  train: 0.8
+  validation: 0.1
+  test: 0.1
+
+filtering:
+  only_approved: true
+  min_quality_score: 7.0
+  min_confidence: 0.0
+  remove_duplicates: true
+  remove_incomplete: true
+
+seed: 42
+output_dir: "datasets"
+
+validation:
+  require_review_info: true
+  require_lineage: true

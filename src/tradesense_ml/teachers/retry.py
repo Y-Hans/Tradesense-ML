@@ -21,7 +21,9 @@ class RetryConfig(BaseModel):
     model_config = ConfigDict(frozen=True)
 
     max_retries: int = Field(default=3, ge=0, description="Maximum number of retry attempts")
-    initial_backoff_sec: float = Field(default=0.5, ge=0.0, description="Initial backoff delay in seconds")
+    initial_backoff_sec: float = Field(
+        default=0.5, ge=0.0, description="Initial backoff delay in seconds"
+    )
     backoff_factor: float = Field(default=2.0, ge=1.0, description="Exponential backoff multiplier")
     retry_on_parsing_error: bool = Field(
         default=True, description="Whether to retry on JSON/parsing errors"

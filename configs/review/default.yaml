@@ -1,0 +1,15 @@
+# Review Pipeline Hydra Configuration
+strategy: "single"
+reviewer: "rule_based"
+approval_threshold: 7.0
+revision_threshold: 4.0
+criteria_version: "v1.0.0"
+review_version: "v1.0.0"
+review_timeout: 30.0
+
+quality_weights:
+  reasoning_quality: 0.25
+  coaching_usefulness: 0.25
+  educational_value: 0.20
+  consistency: 0.15
+  completeness: 0.15

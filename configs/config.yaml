@@ -2,6 +2,8 @@
 defaults:
   - dataset: default
   - teacher: default
+  - review: default
+  - benchmark: default
   - training: default
   - evaluation: default
   - model: default
@@ -9,6 +11,7 @@ defaults:
   - storage: default
   - experiment: default
   - _self_
+
 
 app_name: "TradeSense ML"
 environment: "development"

@@ -11,13 +11,16 @@ from typing import Any
 from tradesense_ml.domain.schemas.examples import ReviewedExample
 from tradesense_ml.domain.schemas.review import (
     ReviewAuditRecord,
-    ReviewDecision,
     ReviewStage,
+    ReviewVerdict,
 )
 from tradesense_ml.logging.logger import get_logger
 from tradesense_ml.pipelines.base import BasePipeline
+from tradesense_ml.review.pipeline import ReviewPipeline as CoachReviewPipeline
 
 logger = get_logger()
+
+__all__ = ["BaseReviewStage", "ReviewPipeline", "CoachReviewPipeline"]
 
 
 class BaseReviewStage(ABC):
@@ -33,7 +36,7 @@ class BaseReviewStage(ABC):
 
 
 class ReviewPipeline(BasePipeline[ReviewedExample, ReviewedExample]):
-    """Orchestrator for multi-stage review pipeline."""
+    """Orchestrator for multi-stage dataset example review pipeline."""
 
     def __init__(self, stages: list[BaseReviewStage] | None = None) -> None:
         super().__init__(pipeline_name="review_pipeline")
@@ -60,7 +63,7 @@ class ReviewPipeline(BasePipeline[ReviewedExample, ReviewedExample]):
                 update={"review_status": stage.stage_enum, "audit_trail": updated_audit}
             )
 
-            if audit_record.decision == ReviewDecision.REJECT:
+            if audit_record.decision == ReviewVerdict.REJECT:
                 logger.warning(
                     f"Example {current_example.example_id} rejected at stage '{stage.stage_enum.value}'"
                 )

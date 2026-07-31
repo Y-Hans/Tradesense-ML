@@ -17,7 +17,9 @@ class PromptContext(BaseModel):
     trade_record_text: str = Field(..., description="Formatted summary of trade parameters")
     market_context_text: str = Field(..., description="Formatted summary of market context")
     user_notes_text: str = Field(..., description="Formatted user rationale/notes")
-    requested_aspects_text: str = Field(..., description="Comma-separated requested coaching aspects")
+    requested_aspects_text: str = Field(
+        ..., description="Comma-separated requested coaching aspects"
+    )
     prompt_version: str = Field(default="v1", description="Target prompt template version")
     extra_context: dict[str, Any] = Field(
         default_factory=dict, description="Additional context attributes"
@@ -53,8 +55,16 @@ class PromptBuilder:
 
         market_ctx = request.market_context
         if market_ctx:
-            regime_val = market_ctx.regime.value if hasattr(market_ctx.regime, 'value') else market_ctx.regime
-            vol_val = market_ctx.volatility.value if hasattr(market_ctx.volatility, 'value') else market_ctx.volatility
+            regime_val = (
+                market_ctx.regime.value
+                if hasattr(market_ctx.regime, "value")
+                else market_ctx.regime
+            )
+            vol_val = (
+                market_ctx.volatility.value
+                if hasattr(market_ctx.volatility, "value")
+                else market_ctx.volatility
+            )
             ctx_id = getattr(market_ctx, "context_id", getattr(market_ctx, "scenario_id", "N/A"))
             market_lines = [
                 f"Context ID: {ctx_id}",
@@ -66,18 +76,24 @@ class PromptBuilder:
                 market_lines.append(f"Trend Direction: {market_ctx.trend_direction}")
             if market_ctx.indicators:
                 ind = market_ctx.indicators
-                market_lines.extend([
-                    f"RSI (14): {ind.rsi_14 if ind.rsi_14 is not None else 'N/A'}",
-                    f"ATR: {ind.atr_14 if hasattr(ind, 'atr_14') and ind.atr_14 is not None else 'N/A'}",
-                    f"MACD Hist: {ind.macd_histogram if ind.macd_histogram is not None else 'N/A'}",
-                ])
+                market_lines.extend(
+                    [
+                        f"RSI (14): {ind.rsi_14 if ind.rsi_14 is not None else 'N/A'}",
+                        f"ATR: {ind.atr_14 if hasattr(ind, 'atr_14') and ind.atr_14 is not None else 'N/A'}",
+                        f"MACD Hist: {ind.macd_histogram if ind.macd_histogram is not None else 'N/A'}",
+                    ]
+                )
             market_context_text = "\n".join(market_lines)
 
         else:
             market_context_text = "No detailed market context provided."
 
-        user_notes_text = request.user_notes if request.user_notes else "No notes provided by trader."
-        requested_aspects_text = ", ".join(request.requested_aspects) if request.requested_aspects else "general"
+        user_notes_text = (
+            request.user_notes if request.user_notes else "No notes provided by trader."
+        )
+        requested_aspects_text = (
+            ", ".join(request.requested_aspects) if request.requested_aspects else "general"
+        )
 
         return PromptContext(
             request_id=request.request_id,

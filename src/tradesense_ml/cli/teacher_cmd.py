@@ -22,7 +22,9 @@ from tradesense_ml.teachers.providers import (
 )
 from tradesense_ml.teachers.router import TeacherRouter
 
-app = typer.Typer(name="teacher", help="Interact with Teacher LLM providers and inference pipeline.")
+app = typer.Typer(
+    name="teacher", help="Interact with Teacher LLM providers and inference pipeline."
+)
 console = Console()
 
 
@@ -71,12 +73,8 @@ def infer_single(
     provider: str = typer.Option(
         "openrouter", "--provider", "-p", help="Teacher LLM provider name"
     ),
-    model: str | None = typer.Option(
-        None, "--model", "-m", help="Model name override"
-    ),
-    prompt_version: str = typer.Option(
-        "v1", "--prompt-version", help="Prompt template version"
-    ),
+    model: str | None = typer.Option(None, "--model", "-m", help="Model name override"),
+    prompt_version: str = typer.Option("v1", "--prompt-version", help="Prompt template version"),
     output_path: str | None = typer.Option(
         None, "--output-path", "-o", help="Path to save output CoachResponse JSON"
     ),
@@ -98,11 +96,18 @@ def infer_single(
         console.print("[dim]No request file supplied. Generating synthetic CoachRequest...[/dim]")
         gen_pipeline = ConcreteSyntheticGenerationPipeline()
         from tradesense_ml.domain.schemas.synthetic import SyntheticGeneratorConfig
-        requests, _ = gen_pipeline.generate_dataset(SyntheticGeneratorConfig(num_samples=1, seed=42))
-        coach_request = requests[0]
-        console.print(f"[green]Generated synthetic CoachRequest '{coach_request.request_id}'.[/green]")
 
-    pipeline = TeacherInferencePipeline(router=router, strategy=SingleTeacherStrategy(provider_name=provider))
+        requests, _ = gen_pipeline.generate_dataset(
+            SyntheticGeneratorConfig(num_samples=1, seed=42)
+        )
+        coach_request = requests[0]
+        console.print(
+            f"[green]Generated synthetic CoachRequest '{coach_request.request_id}'.[/green]"
+        )
+
+    pipeline = TeacherInferencePipeline(
+        router=router, strategy=SingleTeacherStrategy(provider_name=provider)
+    )
     response = pipeline.run(
         coach_request,
         provider=provider,
@@ -115,7 +120,9 @@ def infer_single(
     console.print(f"[bold]Headline:[/bold] {response.headline}")
     console.print(f"[bold]Overall Score:[/bold] {response.overall_score}/10.0")
     console.print(f"[bold]Risk Score:[/bold] {response.risk_evaluation.risk_score}/10.0")
-    console.print(f"[bold]Discipline Score:[/bold] {response.discipline_evaluation.discipline_score}/10.0")
+    console.print(
+        f"[bold]Discipline Score:[/bold] {response.discipline_evaluation.discipline_score}/10.0"
+    )
     console.print(f"[bold]Latency:[/bold] {response.metadata.get('latency_ms', 0.0)} ms")
 
     if output_path:
@@ -136,12 +143,8 @@ def infer_batch(
     provider: str = typer.Option(
         "openrouter", "--provider", "-p", help="Teacher LLM provider name"
     ),
-    model: str | None = typer.Option(
-        None, "--model", "-m", help="Model name override"
-    ),
-    prompt_version: str = typer.Option(
-        "v1", "--prompt-version", help="Prompt template version"
-    ),
+    model: str | None = typer.Option(None, "--model", "-m", help="Model name override"),
+    prompt_version: str = typer.Option("v1", "--prompt-version", help="Prompt template version"),
 ) -> None:
     """Run batch Teacher Inference across a set of CoachRequests."""
     inp = Path(input_path)
@@ -208,6 +211,8 @@ def teacher_generate(
 def teacher_test() -> None:
     """Test connectivity and token usage calculation for configured providers."""
     router = _get_default_router()
-    console.print(f"[bold yellow]Testing {len(router.providers)} registered Teacher Providers...[/bold yellow]")
+    console.print(
+        f"[bold yellow]Testing {len(router.providers)} registered Teacher Providers...[/bold yellow]"
+    )
     for name in router.providers:
         console.print(f" - Provider '{name}': [green]OK[/green]")

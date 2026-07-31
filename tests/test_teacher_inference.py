@@ -47,7 +47,6 @@ def sample_trade() -> Trade:
     )
 
 
-
 @pytest.fixture
 def sample_market_context() -> MarketContext:
     """Fixture providing a sample MarketContext model."""
@@ -57,7 +56,6 @@ def sample_market_context() -> MarketContext:
         regime=MarketRegime.BULLISH_TREND,
         volatility=VolatilityLevel.HIGH,
     )
-
 
 
 @pytest.fixture
@@ -111,7 +109,9 @@ def mock_valid_response_dict(sample_coach_request: CoachRequest) -> dict:
 class CustomMockTeacherProvider(BaseTeacherProvider):
     """Custom mock provider returning configurable JSON responses."""
 
-    def __init__(self, provider_name: str = "custom_mock", response_payload: str | None = None) -> None:
+    def __init__(
+        self, provider_name: str = "custom_mock", response_payload: str | None = None
+    ) -> None:
         super().__init__(
             provider_name=provider_name,
             default_model="mock-v1",
@@ -216,7 +216,6 @@ def test_response_validator(mock_valid_response_dict: dict) -> None:
         ResponseValidator.validate_and_raise(invalid_resp)
 
 
-
 def test_retry_handler() -> None:
     """Test RetryHandler backoff and retry behavior."""
     config = RetryConfig(max_retries=2, initial_backoff_sec=0.01, backoff_factor=1.0)
@@ -258,7 +257,6 @@ def test_cli_commands(sample_coach_request: CoachRequest) -> None:
     res_prov = runner.invoke(app, ["teacher", "providers"])
     assert res_prov.exit_code == 0
     assert "openrouter" in res_prov.stdout.lower()
-
 
     # 2. Test single infer
     with tempfile.TemporaryDirectory() as tmp_dir:
