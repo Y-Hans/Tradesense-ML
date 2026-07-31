@@ -10,6 +10,7 @@ from tradesense_ml.cli import (
     distillation_cmd,
     eval_cmd,
     export_cmd,
+    finetune_cmd,
     registry_cmd,
     review_cmd,
     serve_cmd,
@@ -33,6 +34,7 @@ app.add_typer(train_cmd.app, name="train")
 app.add_typer(eval_cmd.app, name="evaluate")
 app.add_typer(benchmark_cmd.app, name="benchmark")
 app.add_typer(distillation_cmd.app, name="distillation")
+app.add_typer(finetune_cmd.app, name="finetune")
 app.add_typer(registry_cmd.app, name="registry")
 app.add_typer(export_cmd.app, name="export")
 app.add_typer(serve_cmd.app, name="serve")

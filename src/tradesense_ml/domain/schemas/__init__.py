@@ -56,6 +56,30 @@ from tradesense_ml.domain.schemas.examples import (
     TrainingExample,
     TrainingMessage,
 )
+from tradesense_ml.domain.schemas.finetuning import (
+    CheckpointResult,
+    ModelArtifact,
+    ModelCheckpoint,
+    ModelConfiguration,
+    ModelLineage,
+    ModelManifest,
+    ModelMetadata,
+    ModelPackage,
+    ModelStatistics,
+    ModelSummary,
+    TrainingBackendConfiguration,
+    TrainingBackendResult,
+    TrainingConfiguration,
+    TrainingExecution,
+    TrainingMetrics,
+    TrainingProcessingResult,
+    TrainingReport,
+    TrainingRun,
+    TrainingStatistics,
+)
+from tradesense_ml.domain.schemas.finetuning import (
+    EvaluationResult as FineTuningEvaluationResult,
+)
 from tradesense_ml.domain.schemas.inference import InferenceRequest, InferenceResponse
 from tradesense_ml.domain.schemas.lineage import DatasetSplit, DatasetVersionMetadata
 from tradesense_ml.domain.schemas.market_context import (
@@ -175,4 +199,24 @@ __all__ = [
     "DistillationRun",
     "DistillationReport",
     "DistillationArtifact",
+    "ModelConfiguration",
+    "TrainingBackendConfiguration",
+    "TrainingConfiguration",
+    "TrainingExecution",
+    "ModelCheckpoint",
+    "CheckpointResult",
+    "TrainingMetrics",
+    "FineTuningEvaluationResult",
+    "TrainingStatistics",
+    "TrainingBackendResult",
+    "TrainingProcessingResult",
+    "ModelMetadata",
+    "ModelSummary",
+    "ModelStatistics",
+    "ModelLineage",
+    "ModelManifest",
+    "TrainingReport",
+    "TrainingRun",
+    "ModelPackage",
+    "ModelArtifact",
 ]

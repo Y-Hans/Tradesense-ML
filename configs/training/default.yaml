@@ -1,11 +1,45 @@
+# Hydra Training Configuration for TradeSense ML Fine-Tuning Pipeline
+
 run_name: "qwen2.5-7b-coaching-qlora"
-strategy: "qlora"
-learning_rate: 0.0002
-batch_size: 4
-gradient_accumulation_steps: 4
-num_epochs: 3
-warmup_ratio: 0.03
-optimizer: "adamw_torch"
-lr_scheduler: "cosine"
-save_steps: 100
-eval_steps: 100
+strategy_name: "SFTTrainingStrategy"
+
+backend_config:
+  backend_name: "mock"
+  device: "cuda"
+  distributed_mode: "none"
+  deepspeed_config: null
+
+model_config_params:
+  base_model_name_or_path: "Qwen/Qwen2.5-7B-Instruct"
+  architecture: "Qwen2ForCausalLM"
+  precision: "bfloat16"
+  use_lora: true
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+  learning_rate: 0.0002
+  num_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4
+  warmup_ratio: 0.03
+  optimizer: "adamw_torch"
+  lr_scheduler: "cosine"
+  weight_decay: 0.01
+  max_seq_length: 2048
+  checkpoint_interval_steps: 100
+  eval_interval_steps: 100
+  random_seed: 42
+  resume_from_checkpoint: null
+
+output_dir: "outputs/finetuning"
+export_formats:
+  - "directory"
+  - "json"
+  - "markdown"
+  - "manifest"
