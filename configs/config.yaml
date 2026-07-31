@@ -4,6 +4,7 @@ defaults:
   - teacher: default
   - review: default
   - benchmark: default
+  - distillation: default
   - training: default
   - evaluation: default
   - model: default

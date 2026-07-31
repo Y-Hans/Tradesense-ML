@@ -73,6 +73,23 @@ class DatasetSettings(BaseModel):
     output_dir: str = "datasets"
 
 
+class DistillationSettings(BaseModel):
+    """Distillation pipeline configuration settings."""
+
+    distillation_id: str = "tradesense_distillation_v1"
+    version: str = "v1.0.0"
+    distillation_strategy: str = "SFTStrategy"
+    selection_strategy: str = "ThresholdSelection"
+    selection_threshold: float = 7.0
+    sampling_strategy: str = "UniformSampling"
+    sampling_rate: float = 1.0
+    curriculum_strategy: str = "StandardCurriculumStrategy"
+    export_formats: list[str] = Field(default_factory=lambda: ["json", "jsonl", "parquet", "md"])
+    validation_enabled: bool = True
+    random_seed: int = 42
+    output_dir: str = "outputs/distillation"
+
+
 class AppSettings(BaseModel):
     """Global application settings."""
 
@@ -83,6 +100,7 @@ class AppSettings(BaseModel):
     experiment: ExperimentSettings = Field(default_factory=ExperimentSettings)
     review: ReviewSettings = Field(default_factory=ReviewSettings)
     dataset: DatasetSettings = Field(default_factory=DatasetSettings)
+    distillation: DistillationSettings = Field(default_factory=DistillationSettings)
 
 
 def load_hydra_config(

@@ -7,6 +7,7 @@ from tradesense_ml import __version__
 from tradesense_ml.cli import (
     benchmark_cmd,
     dataset_cmd,
+    distillation_cmd,
     eval_cmd,
     export_cmd,
     registry_cmd,
@@ -31,6 +32,7 @@ app.add_typer(review_cmd.app, name="review")
 app.add_typer(train_cmd.app, name="train")
 app.add_typer(eval_cmd.app, name="evaluate")
 app.add_typer(benchmark_cmd.app, name="benchmark")
+app.add_typer(distillation_cmd.app, name="distillation")
 app.add_typer(registry_cmd.app, name="registry")
 app.add_typer(export_cmd.app, name="export")
 app.add_typer(serve_cmd.app, name="serve")

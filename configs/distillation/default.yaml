@@ -1,0 +1,31 @@
+# Hydra Distillation Pipeline Configuration
+
+distillation_id: "tradesense_distillation_v1"
+version: "v1.0.0"
+distillation_strategy: "SFTStrategy"
+
+selection_strategy: "ThresholdSelection"
+selection_threshold: 7.0
+selection_thresholds:
+  quality_score: 7.0
+  pass_rate: 0.8
+
+sampling_strategy: "UniformSampling"
+sampling_rate: 1.0
+sample_size: null
+
+curriculum_strategy: "StandardCurriculumStrategy"
+
+preference_config:
+  enabled: true
+  min_score_delta: 1.0
+
+export_formats:
+  - "json"
+  - "jsonl"
+  - "parquet"
+  - "md"
+
+validation_enabled: true
+random_seed: 42
+output_dir: "outputs/distillation"
