@@ -1,0 +1,22 @@
+Analyze the following trading scenario and provide detailed coaching feedback.
+
+[Trade Record]
+{trade_record}
+
+[Market Context]
+{market_context}
+
+[User Notes]
+{user_notes}
+
+[Requested Aspects]
+{requested_aspects}
+
+Respond with a complete JSON object adhering strictly to the TradeSense CoachResponse schema.
+Ensure your response includes:
+- headline: A single sentence summary headline.
+- overall_score: A numerical score from 0.0 to 10.0.
+- risk_evaluation: Detailed risk analysis with risk_score (0-10), position_size_compliant (bool), stop_loss_defined (bool), risk_summary, and relevant reason_codes.
+- discipline_evaluation: Behavioral analysis with discipline_score (0-10), fomo_indicator (bool), revenge_trade_indicator (bool), overtrading_indicator (bool), plan_adherence_score (0-10), discipline_summary, and relevant reason_codes.
+- actionable_advice: Bulleted list of specific, concrete steps.
+- educational_note: Clear explanation of trading concepts involved.

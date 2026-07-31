@@ -42,6 +42,7 @@ from tradesense_ml.domain.schemas.synthetic import (
 )
 from tradesense_ml.domain.schemas.teacher import (
     ProviderMetadata,
+    RenderedPrompt,
     TeacherRequest,
     TeacherResponse,
     TokenUsage,
@@ -67,6 +68,7 @@ __all__ = [
     "CoachResponse",
     "TokenUsage",
     "ProviderMetadata",
+    "RenderedPrompt",
     "TeacherRequest",
     "TeacherResponse",
     "RubricCriterion",
@@ -90,3 +92,4 @@ __all__ = [
     "InferenceRequest",
     "InferenceResponse",
 ]
+
